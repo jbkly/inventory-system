@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Taco",
+    "type": "Mexican",
+    "expiration": 1456094539299
+  },
+  {
+    "label": "Burrito",
+    "type": "Tex-Mex",
+    "expiration": 1456089223206
+  },
+  {
+    "label": "Pizza",
+    "type": "Italian",
+    "expiration": 1456109060070
+  }
+]

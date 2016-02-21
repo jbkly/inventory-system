@@ -1,0 +1,20 @@
+{
+  "name": "inventory-api",
+  "version": "0.0.1",
+  "description": "A simple API layer to model an inventory",
+  "main": "server.js",
+  "scripts": {
+    "test": " "
+  },
+  "author": "jbkly",
+  "license": "MIT",
+  "dependencies": {
+    "good": "^6.6.0",
+    "good-console": "^5.3.1",
+    "hapi": "^13.0.0",
+    "hapi-swagger": "^4.2.1",
+    "inert": "^3.2.0",
+    "joi": "^8.0.2",
+    "vision": "^4.0.1"
+  }
+}
