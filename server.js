@@ -45,20 +45,20 @@ const routes = [
   {
     method: 'GET',
     path: '/api/items',
-    config: {
-      tags: ['api'],
-      description: 'Get all items'
-    },
+    config: { tags: ['api'], description: 'Get all items' },
     handler: getItems
   },
   {
     method: 'POST',
     path: '/api/items',
-    config: {
-      tags: ['api'],
-      description: 'Add item to inventory' // TODO: make this config DRYer?
-    },
+    config: { tags: ['api'], description: 'Add item to inventory' },
     handler: addItem
+  },
+  {
+    method: 'DELETE',
+    path: '/api/items/{label}',
+    config: { tags: ['api'], description: 'Remove item from inventory' },
+    handler: removeItem
   }
 ];
 
@@ -83,24 +83,56 @@ function getItems(request, reply) {
   });
 }
 
-function addItem(request, reply) { // TODO: use promises instead of nesting async calls
+function addItem(request, reply) {
   fs.readFile(INVENTORY, (err, data) => {
     if (err) {
       console.error(err);
-      process.exit(1);
+      return reply(err).code(500);
     }
-    var items = JSON.parse(data);
-    var newItem = {
-      label: encodeURIComponent(request.params.label), // TODO: validate w/ joi, no empty fields
-      type: encodeURIComponent(request.params.type),
-      expiration: encodeURIComponent(request.params.expiration) || Date.now() + 300000 // 5min
-    };
-    items.push(newItem);
+    let items = JSON.parse(data),
+        label = encodeURIComponent(request.params.label),
+        type = encodeURIComponent(request.params.type),
+        expiration = encodeURIComponent(request.params.expiration) || Date.now() + 300000; // 5min
+
+    if (items[label]) {
+      return reply('Item by that label is already in inventory').code(409);
+    }
+
+    items[label] = { label, type, expiration }
+
     fs.writeFile(INVENTORY, JSON.stringify(items, null, 2), (err) => {
       let response = err || {
         statusCode: 201,
         message: 'Item added successfully',
         data: items
+      }
+      reply(response);
+    });
+  });
+}
+
+function removeItem(request, reply) {
+  fs.readFile(INVENTORY, (err, data) => {
+    let label = encodeURIComponent(request.params.label);
+    if (err) {
+      console.error(err);
+      return reply(err).code(500);
+    }
+    if (!label) return reply('No label to remove').code(400)
+
+    let items = JSON.parse(data);
+    if (!items[label]) {
+      return reply('Item not in inventory').code(404);
+    }
+
+    let deletedItem = Object.assign(items[label]);
+    delete items[label];
+
+    fs.writeFile(INVENTORY, JSON.stringify(items, null, 2), (err) => {
+      let response = err || {
+        statusCode: 200,
+        message: 'Item successfully removed',
+        data: deletedItem
       }
       reply(response);
     });
