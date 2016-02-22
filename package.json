@@ -9,8 +9,6 @@
   "author": "jbkly",
   "license": "MIT",
   "dependencies": {
-    "good": "^6.6.0",
-    "good-console": "^5.3.1",
     "hapi": "^13.0.0",
     "hapi-swagger": "^4.2.1",
     "inert": "^3.2.0",

@@ -6,11 +6,12 @@ const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('./package');
 const fs = require('fs');
-const path = require('path');
+const Path = require('path');
 
-const INVENTORY = path.join(__dirname, 'store/items.json');
+const INVENTORY = Path.join(__dirname, 'store/items.json');
 
 const server = new Hapi.Server();
+
 server.connection({
   host: 'localhost',
   port: process.env.PORT || 3000
@@ -42,6 +43,16 @@ server.register([
 
 // API routes
 const routes = [
+  {
+    method: 'GET',
+    path: '/{path*}',
+    handler: {
+      directory: {
+        path: './public',
+        index: true
+      }
+    }
+  },
   {
     method: 'GET',
     path: '/api/items',

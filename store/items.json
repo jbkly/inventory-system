@@ -13,10 +13,5 @@
     "label": "Pizza",
     "type": "Italian",
     "expiration": 1456109060070
-  },
-  "undefined": {
-    "label": "undefined",
-    "type": "undefined",
-    "expiration": "undefined"
   }
 }
