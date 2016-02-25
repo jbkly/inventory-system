@@ -18,13 +18,13 @@ a:hover {
 
 h1, h2, h3, h4 {
   font-weight: bold;
-  margin: 0 0 15px;
+  margin: 15px 0 0;
   padding: 0;
 }
 
 h1 {
   border-bottom: 1px solid #ddd;
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: bold;
   margin: 0 0 15px;
   padding: 0;
@@ -32,21 +32,32 @@ h1 {
 
 h2 {
   border-bottom: 1px solid #eee;
-  font-size: 2em;
-}
-
-h3 {
   font-size: 1.5em;
 }
 
-h4 {
+h3 {
   font-size: 1.2em;
 }
 
+h4 {
+  font-size: 1em;
+}
+
 p, ul {
-  margin: 15px 0;
+  margin: 0;
 }
 
 ul {
   padding-left: 30px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1.1em;
+  margin-right: 4px;
+}
+
+select,
+input[type="submit"] {
+  font-size: 1.2em;
 }

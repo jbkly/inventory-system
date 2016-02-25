@@ -2,26 +2,31 @@
   "Taco": {
     "label": "Taco",
     "type": "Mexican",
-    "expiration": 1456094539299
+    "expiration": 1456431676475
   },
   "Burrito": {
     "label": "Burrito",
     "type": "Tex-Mex",
-    "expiration": 1456089223206
+    "expiration": 1456432044729
   },
   "Pizza": {
     "label": "Pizza",
     "type": "Italian",
     "expiration": 1456109060070
   },
-  "Croissant-wich": {
-    "label": "Croissant-wich",
-    "type": "French-murican",
-    "expiration": 9283374098374099000
+  "adfa": {
+    "label": "adfa",
+    "type": "adfa",
+    "expiration": 1456440266641
   },
-  "Bison Burger": {
-    "label": "Bison Burger",
-    "type": "native murican",
-    "expiration": 1456375061762
+  "www": {
+    "label": "www",
+    "type": "www",
+    "expiration": 1456483173173
+  },
+  "adfwww": {
+    "label": "adfwww",
+    "type": "wwww",
+    "expiration": 1456440887418
   }
 }
