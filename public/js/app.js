@@ -1,120 +1,118 @@
-// const CommentBox = React.createClass({
-//   loadCommentsFromServer: function() {
-//     $.ajax({
-//       url: this.props.url,
-//       dataType: 'json',
-//       cache: false,
-//       success: data => this.setState({data}),
-//       error: (xhr, status, err) => console.error(this.props.url, status, err.toString())
-//     });
-//   },
-//   handleCommentSubmit: function(comment) {
-//     // optimistically update UI before hearing back from server
-//     var comments = this.state.data;
-//     comment.id = Date.now(); // create a temporary id, will be replaced by the server-gen id
-//     var newComments = comments.concat([comment]);
-//     this.setState({data: newComments});
+const InventorySystem = React.createClass({
+  loadInventory: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: reply => this.setState({data: reply.data}),
+      error: (xhr, status, err) => console.error(this.props.url, status, err.toString())
+    });
+  },
+  handleAddToInventory: function(item) {
+    // optimistically update UI before hearing back from server
+    let items = this.state.data;
+    let updatedItems = Object.assign(items);
+    updatedItems[item.label] = item;
+    this.setState({data: updatedItems});
 
-//     $.ajax({
-//       url: this.props.url,
-//       dataType: 'json',
-//       type: 'POST',
-//       data: comment,
-//       success: data => this.setState({data}),
-//       error: (xhr, status, err) => {r
-//         this.setState({data: comments});
-//         console.errer(this.props.url, status, err.toString())
-//       }
-//     });
-//   },
-//   getInitialState: function() {
-//     return {data: []};
-//   },
-//   componentDidMount: function() {
-//     this.loadCommentsFromServer();
-//     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-//   },
-//   render: function() {
-//     return (
-//       <div className='CommentBox'>
-//         <h1>Comments</h1>
-//         <CommentList data={this.state.data} />
-//         <CommentForm onCommentSubmit={this.handleCommentSubmit} />
-//       </div>
-//     );
-//   }
-// });
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: item,
+      success: reply => this.setState({data: reply.data}),
+      error: (xhr, status, err) => {
+        this.setState({data: items});
+        console.errer(this.props.url, status, err.toString())
+      }
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadInventory();
+    setInterval(this.loadInventory, this.props.pollInterval);
+  },
+  render: function() {
+    return (
+      <div className='inventory'>
+        <h1>Inventory System</h1>
+        <ItemList data={this.state.data} />
+        <AddItemForm onAddItem={this.handleAddToInventory} />
+      </div>
+    );
+  }
+});
 
-// const CommentList = React.createClass({
-//   render: function() {
-//     var commentNodes = this.props.data.map(function(comment) {
-//       return (
-//         <Comment author={comment.author} key={comment.id}>{comment.text}</Comment>
-//       );
-//     });
-//     return (
-//       <div className='commentList'>
-//         {commentNodes}
-//       </div>
-//     );
-//   }
-// });
+const ItemList = React.createClass({
+  render: function() {
+    let itemList = Array.from(Object.keys(this.props.data), key => {
+      let item = this.props.data[key];
+      return (
+        <Item label={item.label} type={item.type} expiration={item.expiration} key={item.label}>{item.label}</Item>
+      );
+    });
+    return (
+      <div className='itemList'>
+        {itemList}
+      </div>
+    );
+  }
+});
 
-// const CommentForm = React.createClass({
-//   getInitialState: function() {
-//     return {author: '', text: ''};
-//   },
-//   handleAuthorChange: function(e) {
-//     this.setState({author: e.target.value});
-//   },
-//   handleTextChange: function(e) {
-//     this.setState({text: e.target.value});
-//   },
-//   handleSubmit: function(e) {
-//     e.preventDefault();
-//     let author = this.state.author.trim();
-//     let text = this.state.text.trim();
-//     if (!text || !author) return;
-//     this.props.onCommentSubmit({author, text});
-//     this.setState({author: '', text: ''});
-//   },
-//   render: function() {
-//     return (
-//       <form className='commentForm' onSubmit={this.handleSubmit}>
-//         <input
-//           type='text'
-//           placeholder='Your Name'
-//           value={this.state.author}
-//           onChange={this.handleAuthorChange}
-//         />
-//         <input
-//           type='text'
-//           placeholder='Say something...'
-//           value={this.state.text}
-//           onChange={this.handleTextChange}
-//         />
-//         <input type='submit' value='Post' />
-//       </form>
-//     );
-//   }
-// });
+const AddItemForm = React.createClass({
+  getInitialState: function() {
+    return {label: '', type: '', expiration: ''};
+  },
+  handleLabelChange: function(e) {
+    this.setState({label: e.target.value});
+  },
+  handleTypeChange: function(e) {
+    this.setState({type: e.target.value});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    let label = this.state.label.trim();
+    let type = this.state.type.trim();
+    if (!type || !label) return;
+    this.props.onAddItem({label, type});
+    this.setState({label: '', type: '', expiration: ''});
+  },
+  render: function() {
+    return (
+      <form className='addItemForm' onSubmit={this.handleSubmit}>
+        <input
+          type='text'
+          placeholder='Item Label'
+          value={this.state.label}
+          onChange={this.handleLabelChange}
+        />
+        <input
+          type='text'
+          placeholder='Type'
+          value={this.state.type}
+          onChange={this.handleTypeChange}
+        />
+        <input type='submit' value='Post' />
+      </form>
+    );
+  }
+});
 
-// const Comment = React.createClass({
-//   rawMarkup: function() {
-//     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
-//     return { __html: rawMarkup };
-//   },
-//   render: function() {
-//     return (
-//       <div className='comment'>
-//         <h2 className='commentAuthor'>{this.props.author}</h2>
-//         <span dangerouslySetInnerHTML={this.rawMarkup()} />
-//       </div>
-//     );
-//   }
-// });
+const Item = React.createClass({
+  render: function() {
+    return (
+      <div className='item'>
+        <h2 className='itemLabel'>{this.props.label}</h2>
+        <p className='itemType'>Type: {this.props.type}</p>
+        <p className='itemExpiration'>Expires: {this.props.expiration}</p>
+      </div>
+    );
+  }
+});
 
-// ReactDOM.render(
-//   <CommentBox url='/api/comments' pollInterval={2000} />,
-//   document.getElementById('content')
-// );
+ReactDOM.render(
+  <InventorySystem url='/api/items' pollInterval={2000} />,
+  document.getElementById('content')
+);

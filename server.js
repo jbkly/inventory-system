@@ -75,14 +75,6 @@ const routes = [
 
 server.route(routes);
 
-server.start((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('server running at: ', server.info.uri);
-  }
-});
-
 function getItems(request, reply) {
   fs.readFile(INVENTORY, (err, data) => {
     let response = err || {
@@ -100,10 +92,11 @@ function addItem(request, reply) {
       console.error(err);
       return reply(err).code(500);
     }
+
     let items = JSON.parse(data),
-        label = encodeURIComponent(request.params.label),
-        type = encodeURIComponent(request.params.type),
-        expiration = encodeURIComponent(request.params.expiration) || Date.now() + 300000; // 5min
+        label = request.payload.label,
+        type = request.payload.type,
+        expiration = parseInt(request.payload.expiration, 10) || Date.now() + 300000; // 5min
 
     if (items[label]) {
       return reply('Item by that label is already in inventory').code(409);
@@ -124,7 +117,7 @@ function addItem(request, reply) {
 
 function removeItem(request, reply) {
   fs.readFile(INVENTORY, (err, data) => {
-    let label = encodeURIComponent(request.params.label);
+    let label = decodeURIComponent(request.params.label);
     if (err) {
       console.error(err);
       return reply(err).code(500);

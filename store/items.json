@@ -13,5 +13,15 @@
     "label": "Pizza",
     "type": "Italian",
     "expiration": 1456109060070
+  },
+  "Croissant-wich": {
+    "label": "Croissant-wich",
+    "type": "French-murican",
+    "expiration": 9283374098374099000
+  },
+  "Bison Burger": {
+    "label": "Bison Burger",
+    "type": "native murican",
+    "expiration": 1456375061762
   }
 }

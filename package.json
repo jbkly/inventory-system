@@ -4,6 +4,7 @@
   "description": "A simple API layer to model an inventory",
   "main": "server.js",
   "scripts": {
+    "server": "nodemon server --ignore public/ --ignore store/",
     "test": " "
   },
   "author": "jbkly",
@@ -14,5 +15,8 @@
     "inert": "^3.2.0",
     "joi": "^8.0.2",
     "vision": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.0"
   }
 }
