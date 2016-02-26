@@ -41,6 +41,14 @@ server.register([
     });
 });
 
+function getRouteConfig(description) {
+  return {
+    tags: ['api'],
+    cors: process.env.DEV ? true : false, // only allow cross-origin in dev environment
+    description: description || ''
+  };
+};
+
 // API routes
 const routes = [
   {
@@ -56,19 +64,19 @@ const routes = [
   {
     method: 'GET',
     path: '/api/items',
-    config: { tags: ['api'], description: 'Get all items' },
+    config: getRouteConfig('Get all items'),
     handler: getItems
   },
   {
     method: 'POST',
     path: '/api/items',
-    config: { tags: ['api'], description: 'Add item to inventory' },
+    config: getRouteConfig('Add item to inventory'),
     handler: addItem
   },
   {
     method: 'DELETE',
     path: '/api/items/{label}',
-    config: { tags: ['api'], description: 'Remove item from inventory' },
+    config: getRouteConfig('Remove item from inventory'),
     handler: removeItem
   }
 ];

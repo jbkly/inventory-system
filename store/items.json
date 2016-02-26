@@ -14,19 +14,9 @@
     "type": "Italian",
     "expiration": 1456109060070
   },
-  "adfa": {
-    "label": "adfa",
-    "type": "adfa",
-    "expiration": 1456440266641
-  },
-  "www": {
-    "label": "www",
-    "type": "www",
-    "expiration": 1456483173173
-  },
-  "adfwww": {
-    "label": "adfwww",
-    "type": "wwww",
-    "expiration": 1456440887418
+  "Clams": {
+    "label": "Clams",
+    "type": "seafood",
+    "expiration": 1456446440306
   }
 }

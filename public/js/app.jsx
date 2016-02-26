@@ -1,4 +1,6 @@
-
+import React from 'react';
+import { render as renderDOM} from 'react-dom';
+const moment = require('moment');
 
 const InventorySystem = React.createClass({
   loadInventory: function() {
@@ -146,6 +148,14 @@ const TimePicker = React.createClass({
   }
 });
 
+// TODO: handle removing an item (autocomplete?)
+
+// TODO: notification on removing an item (toastr?)
+
+// TODO: notification on item expiration
+
+// TODO: TESTS
+
 const Item = React.createClass({
   render: function() {
     let displayExpiration = moment(this.props.expiration).fromNow();
@@ -160,7 +170,7 @@ const Item = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <InventorySystem url='/api/items' pollInterval={2000} />,
+renderDOM(
+  <InventorySystem url='//localhost:3000/api/items' pollInterval={2000} />,
   document.getElementById('content')
 );
