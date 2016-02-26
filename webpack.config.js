@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
@@ -7,6 +8,7 @@ module.exports = {
     publicPath: 'http://localhost:8080/assets/',
     filename: 'bundle.js'
   },
+  plugins: [ new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]) ],
   module: {
     loaders: [
       {

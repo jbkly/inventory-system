@@ -1,38 +1,63 @@
 import React from 'react';
-import { render as renderDOM} from 'react-dom';
+import { render as renderDOM } from 'react-dom';
 const moment = require('moment');
 
 const InventorySystem = React.createClass({
+  getInitialState: function() {
+    return {
+      items: [],
+      removedItems: getFromLocalStorage('removedItems') || []
+    };
+  },
   loadInventory: function() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       cache: false,
-      success: reply => this.setState({data: reply.data}),
+      success: reply => this.setState({items: reply.data}),
       error: (xhr, status, err) => console.error(this.props.url, status, err.toString())
     });
   },
   handleAddToInventory: function(item) {
     // optimistically update UI before hearing back from server
-    let items = this.state.data;
+    let items = this.state.items;
     let updatedItems = Object.assign(items);
     updatedItems[item.label] = item;
-    this.setState({data: updatedItems});
+    this.setState({items: updatedItems});
 
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       type: 'POST',
       data: item,
-      success: reply => this.setState({data: reply.data}),
+      success: reply => this.setState({items: reply.data}),
       error: (xhr, status, err) => {
-        this.setState({data: items});
-        console.errer(this.props.url, status, err.toString())
+        this.setState({items});
+        console.error(this.props.url, status, err.toString());
       }
     });
   },
-  getInitialState: function() {
-    return {data: []};
+  removeItem: function(label) {
+    // store removed item for later undo
+    let items = this.state.items;
+    this.state.removedItems.push(items[label]);
+    saveToLocalStorage('removedItems', this.state.removedItems);
+
+    // optimistically update UI
+    let updatedItems = Object.assign(items);
+    delete updatedItems[label];
+    this.setState({items: updatedItems});
+
+    $.ajax({
+      url: this.props.url + '/' + encodeURIComponent(label),
+      dataType: 'json',
+      type: 'DELETE',
+      success: reply => this.setState({items: reply.data}),
+      error: (xhr, status, err) => {
+        this.setState({items});
+        console.error(this.props.url, status, err.toString());
+      }
+    });
   },
   componentDidMount: function() {
     this.loadInventory();
@@ -42,7 +67,7 @@ const InventorySystem = React.createClass({
     return (
       <div className='inventory'>
         <h1>Inventory System</h1>
-        <ItemList data={this.state.data} />
+        <ItemList items={this.state.items} onRemove={this.removeItem} />
         <AddItemForm onAddItem={this.handleAddToInventory} />
       </div>
     );
@@ -50,11 +75,21 @@ const InventorySystem = React.createClass({
 });
 
 const ItemList = React.createClass({
+  handleRemove: function(label) {
+    this.props.onRemove(label);
+  },
   render: function() {
-    let itemList = Array.from(Object.keys(this.props.data), key => {
-      let item = this.props.data[key];
+    let itemList = Array.from(Object.keys(this.props.items), key => {
+      let item = this.props.items[key];
       return (
-        <Item label={item.label} type={item.type} expiration={item.expiration} key={item.label}>{item.label}</Item>
+        <Item
+          label={item.label}
+          type={item.type}
+          expiration={item.expiration}
+          key={item.label}
+          handleRemove={this.handleRemove.bind(this, item.label)}>
+          {item.label}
+        </Item>
       );
     });
     return (
@@ -148,7 +183,7 @@ const TimePicker = React.createClass({
   }
 });
 
-// TODO: handle removing an item (autocomplete?)
+// TODO: handle removing an item by label (autocomplete?)
 
 // TODO: notification on removing an item (toastr?)
 
@@ -165,10 +200,37 @@ const Item = React.createClass({
         <h2 className='itemLabel'>{this.props.label}</h2>
         <p className='itemType'>Type: {this.props.type}</p>
         <p className='itemExpiration'>{expires} {displayExpiration}</p>
+        <button className="removeButton" onClick={this.props.handleRemove}>Remove Item</button>
       </div>
     );
   }
 });
+
+// check if localStorage is supported and available
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+function storageAvailable(type) {
+  try {
+    let storage = window[type],
+        x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+}
+
+function saveToLocalStorage(key, value) {
+  if (!storageAvailable('localStorage')) return false;
+  localStorage[key] = JSON.stringify(value);
+}
+
+function getFromLocalStorage(key) {
+  if (!storageAvailable('localStorage')) return false;
+  if (!localStorage[key]) return null;
+  return JSON.parse(localStorage[key]);
+}
 
 renderDOM(
   <InventorySystem url='//localhost:3000/api/items' pollInterval={2000} />,

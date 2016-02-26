@@ -8,15 +8,5 @@
     "label": "Burrito",
     "type": "Tex-Mex",
     "expiration": 1456432044729
-  },
-  "Pizza": {
-    "label": "Pizza",
-    "type": "Italian",
-    "expiration": 1456109060070
-  },
-  "Clams": {
-    "label": "Clams",
-    "type": "seafood",
-    "expiration": 1456446440306
   }
 }
