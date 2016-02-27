@@ -9,8 +9,6 @@ import TimePicker from './components/TimePicker';
 import AddItemForm from './components/AddItemForm';
 import InventorySystem from './components/InventorySystem';
 
-// TODO: notification on removing an item (toastr?)
-
 // TODO: notification on item expiration
 
 // TODO: handle removing an item by label (autocomplete?)

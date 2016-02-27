@@ -1,12 +1,1 @@
-{
-  "Taco": {
-    "label": "Taco",
-    "type": "Mexican",
-    "expiration": 1456431676475
-  },
-  "Burrito": {
-    "label": "Burrito",
-    "type": "Tex-Mex",
-    "expiration": 1456432044729
-  }
-}
+{}

@@ -14,6 +14,12 @@ export default React.createClass({
       removedItems: util.getFromLocalStorage('removedItems') || []
     };
   },
+  componentWillMount: function() {
+    toastr.options = {
+      positionClass: "toast-bottom-full-width",
+      timeOut: "3000"
+    };
+  },
   loadInventory: function() {
     $.ajax({
       url: this.props.url,
@@ -57,10 +63,16 @@ export default React.createClass({
       url: this.props.url + '/' + encodeURIComponent(label),
       dataType: 'json',
       type: 'DELETE',
-      success: reply => this.setState({items: reply.data}),
+      success: reply => {
+        this.setState({items: reply.data});
+        toastr.remove();
+        toastr.success(`${label} removed from your inventory`);
+      },
       error: (xhr, status, err) => {
         this.setState({items});
         console.error(this.props.url, status, err.toString());
+        toastr.remove();
+        toastr.error(`Error, couldn't remove ${label} from inventory`);
       }
     });
   },
