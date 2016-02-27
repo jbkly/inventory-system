@@ -1,5 +1,13 @@
-export function testUtilityFn(x) {
-  return Math.pow(x, 2);
+
+export function saveToLocalStorage(key, value) {
+  if (!storageAvailable('localStorage')) return false;
+  localStorage[key] = JSON.stringify(value);
+}
+
+export function getFromLocalStorage(key) {
+  if (!storageAvailable('localStorage')) return false;
+  if (!localStorage[key]) return null;
+  return JSON.parse(localStorage[key]);
 }
 
 // check if localStorage is supported and available
@@ -15,15 +23,4 @@ function storageAvailable(type) {
   catch(e) {
     return false;
   }
-}
-
-export function saveToLocalStorage(key, value) {
-  if (!storageAvailable('localStorage')) return false;
-  localStorage[key] = JSON.stringify(value);
-}
-
-export function getFromLocalStorage(key) {
-  if (!storageAvailable('localStorage')) return false;
-  if (!localStorage[key]) return null;
-  return JSON.parse(localStorage[key]);
 }

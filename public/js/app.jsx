@@ -9,6 +9,8 @@ import TimePicker from './components/TimePicker';
 import AddItemForm from './components/AddItemForm';
 import InventorySystem from './components/InventorySystem';
 
+// TODO: validate unique label when adding item
+
 // TODO: handle removing an item by label (autocomplete?)
 
 // TODO: notification on removing an item (toastr?)

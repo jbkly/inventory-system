@@ -46,7 +46,10 @@ export default React.createClass({
           value={this.state.type}
           onChange={this.handleTypeChange}
         />
-        <TimePicker onSetExpiration={this.handleExpirationChange} default={this.state.expiration} />
+        <TimePicker
+          onSetExpiration={this.handleExpirationChange}
+          default={this.state.expiration}
+        />
         <input type='submit' value='Add Item' />
       </form>
     );

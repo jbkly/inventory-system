@@ -2,7 +2,6 @@
 
 import React from 'react';
 import * as util from '../utility';
-// import $.ajax?
 
 import ItemList from './ItemList';
 import AddItemForm from './AddItemForm';
@@ -11,7 +10,7 @@ export default React.createClass({
   displayName: 'InventorySystem',
   getInitialState: function() {
     return {
-      items: [],
+      items: {},
       removedItems: util.getFromLocalStorage('removedItems') || []
     };
   },

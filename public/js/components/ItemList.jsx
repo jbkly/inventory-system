@@ -17,9 +17,8 @@ export default React.createClass({
           type={item.type}
           expiration={item.expiration}
           key={item.label}
-          handleRemove={this.handleRemove.bind(this, item.label)}>
-          {item.label}
-        </Item>
+          handleRemove={this.handleRemove.bind(this, item.label)}
+        />
       );
     });
     return (

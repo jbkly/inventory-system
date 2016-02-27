@@ -1,0 +1,45 @@
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import expect from 'expect';
+import expectJSX from 'expect-jsx';
+expect.extend(expectJSX);
+
+import ItemList from '../public/js/components/ItemList';
+import Item from '../public/js/components/Item';
+
+describe('ItemList', () => {
+
+  const renderer = TestUtils.createRenderer();
+
+  before(() => {
+    let items = {
+      "Taco": {
+        "label": "Taco",
+        "type": "Mexican",
+        "expiration": 1456431676475
+      },
+      "Burrito": {
+        "label": "Burrito",
+        "type": "Tex-Mex",
+        "expiration": 1456432044729
+      }
+    };
+    renderer.render(
+      <ItemList items={items} onRemove={console.log} />
+    );
+  });
+
+  it('should render items from the list', () => {
+    const actual = renderer.getRenderOutput();
+    const expected = (
+      <Item
+        label="Burrito"
+        type="Tex-Mex"
+        expiration={1456432044729}
+        handleRemove={function noRefCheck() {}}
+      />
+    );
+    expect(actual).toIncludeJSX(expected);
+  });
+
+});

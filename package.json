@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --inline",
     "server": "DEV=true nodemon server --ignore public/ --ignore store/",
-    "test": "mocha './tests/**/*.spec.js' --compilers js:babel-core/register"
+    "test": "mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
+    "testwatch": "clear && mocha './tests/**/*.spec.js' --compilers js:babel-core/register --watch"
   },
   "author": "jbkly",
   "license": "MIT",
