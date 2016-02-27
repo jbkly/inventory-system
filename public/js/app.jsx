@@ -9,15 +9,15 @@ import TimePicker from './components/TimePicker';
 import AddItemForm from './components/AddItemForm';
 import InventorySystem from './components/InventorySystem';
 
-// TODO: validate unique label when adding item
-
-// TODO: handle removing an item by label (autocomplete?)
-
 // TODO: notification on removing an item (toastr?)
 
 // TODO: notification on item expiration
 
-// TODO: TESTS
+// TODO: handle removing an item by label (autocomplete?)
+
+// TODO: validate unique label when adding item
+
+// TODO: more tests (ui functionality & api, e2e)
 
 renderDOM(
   <InventorySystem url='//localhost:3000/api/items' pollInterval={2000} />,

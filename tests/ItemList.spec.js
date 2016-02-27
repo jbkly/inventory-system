@@ -29,6 +29,12 @@ describe('ItemList', () => {
     );
   });
 
+  it('should render a div of class "itemList"', () => {
+    const actual = renderer.getRenderOutput().props.className.includes('itemList');
+    const expected = true;
+    expect(actual).toEqual(expected);
+  });
+
   it('should render items from the list', () => {
     const actual = renderer.getRenderOutput();
     const expected = (
@@ -40,6 +46,12 @@ describe('ItemList', () => {
       />
     );
     expect(actual).toIncludeJSX(expected);
+  });
+
+  it('should render as many items as there are items in the items list', () => {
+    const actual = renderer.getRenderOutput().props.children.length;
+    const expected = 2;
+    expect(actual).toEqual(expected);
   });
 
 });

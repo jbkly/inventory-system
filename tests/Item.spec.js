@@ -3,7 +3,6 @@ import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import expectJSX from 'expect-jsx';
 expect.extend(expectJSX);
-// import jsdom from 'mocha-jsdom';
 
 import Item from '../public/js/components/Item';
 
@@ -22,6 +21,12 @@ describe('Item', () => {
         handleRemove={console.log}
       />
     );
+  });
+
+  it('should render a div of class "item"', () => {
+    const actual = renderer.getRenderOutput().props.className.includes('item');
+    const expected = true;
+    expect(actual).toEqual(expected);
   });
 
   it('should render the item label', () => {

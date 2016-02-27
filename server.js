@@ -137,7 +137,6 @@ function removeItem(request, reply) {
       return reply('Item not in inventory').code(404);
     }
 
-    // let deletedItem = Object.assign(items[label]); // Is this needed?
     delete items[label];
 
     fs.writeFile(INVENTORY, JSON.stringify(items, null, 2), (err) => {
