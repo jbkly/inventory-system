@@ -9,10 +9,6 @@ import TimePicker from './components/TimePicker';
 import AddItemForm from './components/AddItemForm';
 import InventorySystem from './components/InventorySystem';
 
-// TODO: expiration: if expiration is > 60s away, setTimeout then setInterval when < 60s
-
-// TODO: handle removing an item by label (autocomplete?)
-
 // TODO: validate unique label when adding item
 
 // TODO: more tests (ui functionality & api, e2e)

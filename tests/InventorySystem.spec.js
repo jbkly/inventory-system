@@ -7,6 +7,7 @@ expect.extend(expectJSX);
 import InventorySystem from '../public/js/components/InventorySystem';
 import ItemList from '../public/js/components/ItemList';
 import AddItemForm from '../public/js/components/AddItemForm';
+import RemoveItemForm from '../public/js/components/RemoveItemForm';
 
 describe('InventorySystem', () => {
 
@@ -33,6 +34,12 @@ describe('InventorySystem', () => {
   it('should contain the add item form', () => {
     const actual = renderer.getRenderOutput();
     const expected = <AddItemForm onAddItem={function noRefCheck() {}} />;
+    expect(actual).toIncludeJSX(expected);
+  });
+
+  it('should contain the remove item form', () => {
+    const actual = renderer.getRenderOutput();
+    const expected = <RemoveItemForm items={{}} onRemoveItem={function noRefCheck() {}} />;
     expect(actual).toIncludeJSX(expected);
   });
 

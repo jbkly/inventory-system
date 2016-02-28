@@ -7,6 +7,7 @@ import $ from 'jquery';
 import * as util from '../utility';
 import ItemList from './ItemList';
 import AddItemForm from './AddItemForm';
+import RemoveItemForm from './RemoveItemForm';
 
 export default React.createClass({
   displayName: 'InventorySystem',
@@ -85,7 +86,10 @@ export default React.createClass({
       <div className='inventory'>
         <h1>Inventory System</h1>
         <ItemList items={this.state.items} onRemove={this.removeItem} />
-        <AddItemForm onAddItem={this.handleAddToInventory} />
+        <div className='controls'>
+          <AddItemForm onAddItem={this.handleAddToInventory} />
+          <RemoveItemForm items={this.state.items} onRemoveItem={this.removeItem} />
+        </div>
       </div>
     );
   }

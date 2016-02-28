@@ -5,6 +5,8 @@ body {
   line-height: 1.7;
   margin: 0;
   padding: 30px;
+  min-width: 320px;
+  box-sizing: border-box;
 }
 
 a {
@@ -51,6 +53,13 @@ ul {
   padding-left: 30px;
 }
 
+.itemList,
+.controls {
+  width: 48%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 input[type="text"] {
   padding: 10px;
   font-size: 1.1em;
@@ -69,4 +78,14 @@ input[type="submit"] {
 
 .item.expired .itemExpiration {
   color: red;
+}
+
+/* media queries */
+@media (max-width: 570px) {
+  .itemList,
+  .controls {
+    width: 100%;
+    display: block;
+    vertical-align: top;
+  }
 }

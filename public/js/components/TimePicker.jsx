@@ -13,13 +13,14 @@ export default React.createClass({
       expirations: [
         10000,
         min,
-        min+30000,
+        2*min,
         5*min,
         15*min,
         hour,
         12*hour,
         day,
-        7*day
+        7*day,
+        14*day
       ]
     };
   },
