@@ -9,11 +9,13 @@ import TimePicker from './components/TimePicker';
 import AddItemForm from './components/AddItemForm';
 import InventorySystem from './components/InventorySystem';
 
-// TODO: validate unique label when adding item
-
 // TODO: more tests (ui functionality & api, e2e)
 
 // TODO: undo remove
+
+// TODO: auto focus on label input additemform
+
+// minify and deploy
 
 renderDOM(
   <InventorySystem url='//localhost:3000/api/items' />,

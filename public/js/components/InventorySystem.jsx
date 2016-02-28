@@ -108,11 +108,11 @@ export default React.createClass({
     return (
       <div className='inventory'>
         <h1>Inventory System</h1>
-        <ItemList items={this.state.items} onRemove={this.removeItem} />
+        <ItemList onRemove={this.removeItem} items={this.state.items} />
         <div className='controls'>
           <button name="seedDB" onClick={this.seedDB}>Seed DB with sample items</button>
-          <AddItemForm onAddItem={this.handleAddToInventory} />
-          <RemoveItemForm items={this.state.items} onRemoveItem={this.removeItem} />
+          <AddItemForm onAddItem={this.handleAddToInventory} items={this.state.items} />
+          <RemoveItemForm onRemoveItem={this.removeItem} items={this.state.items}  />
         </div>
       </div>
     );

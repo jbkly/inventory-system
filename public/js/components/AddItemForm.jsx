@@ -2,6 +2,7 @@
 
 import React from 'react';
 import TimePicker from './TimePicker';
+const toastr = require('toastr');
 
 export default React.createClass({
   displayName: 'AddItemForm',
@@ -24,9 +25,13 @@ export default React.createClass({
     let lastDur = this.state.expiration;
     let expiration = Date.now() + this.state.expiration;
 
-    // TODO: Validate that label is unique
-
+    // input validation
     if (!type || !label) return;
+    if (this.props.items[label]) {
+      toastr.error(`${label} is already in your inventory`);
+      return;
+    }
+
     this.props.onAddItem({label, type, expiration});
     this.setState({label: '', type: '', expiration: lastDur});
   },
