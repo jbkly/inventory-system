@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
-import * as util from '../utility';
+const toastr = require('toastr');
+import $ from 'jquery';
 
+import * as util from '../utility';
 import ItemList from './ItemList';
 import AddItemForm from './AddItemForm';
 
@@ -49,7 +51,7 @@ export default React.createClass({
     });
   },
   removeItem: function(label) {
-    // store removed item for later undo
+    // store removed item for possible later undo
     let items = this.state.items;
     this.state.removedItems.push(items[label]);
     util.saveToLocalStorage('removedItems', this.state.removedItems);
@@ -65,13 +67,11 @@ export default React.createClass({
       type: 'DELETE',
       success: reply => {
         this.setState({items: reply.data});
-        toastr.remove();
-        toastr.success(`${label} removed from your inventory`);
+        toastr.success(`${label} has been removed from your inventory`);
       },
       error: (xhr, status, err) => {
         this.setState({items});
         console.error(this.props.url, status, err.toString());
-        toastr.remove();
         toastr.error(`Error, couldn't remove ${label} from inventory`);
       }
     });

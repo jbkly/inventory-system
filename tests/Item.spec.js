@@ -11,7 +11,7 @@ describe('Item', () => {
   const renderer = TestUtils.createRenderer();
 
   before(() => {
-    let item = {label: "Waffle", type: "Belgian", expiration: Date.now() + 60*60000};
+    let item = {label: "Waffle", type: "Belgian", expiration: 77777};
     renderer.render(
       <Item
         label={item.label}
@@ -38,12 +38,6 @@ describe('Item', () => {
   it('should render the item type', () => {
     const actual = renderer.getRenderOutput();
     const expected = <p className='itemType'>Type: Belgian</p>;
-    expect(actual).toIncludeJSX(expected);
-  });
-
-  it('should render the item expiration', () => {
-    const actual = renderer.getRenderOutput();
-    const expected = <p className='itemExpiration'>Expires: in an hour</p>;
     expect(actual).toIncludeJSX(expected);
   });
 

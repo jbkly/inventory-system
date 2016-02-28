@@ -8,7 +8,6 @@ module.exports = {
     publicPath: 'http://localhost:8080/assets/',
     filename: 'bundle.js'
   },
-  plugins: [ new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]) ],
   module: {
     loaders: [
       {

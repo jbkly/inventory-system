@@ -1,22 +1,25 @@
 'use strict';
 
 import React from 'react';
-const moment = require('moment');
+import humanizeDuration from 'humanize-duration';
 
 export default React.createClass({
   displayName: 'TimePicker',
   getInitialState: function() {
     const min = 60000;
     const hour = 60*min;
+    const day = 24*hour;
     return {
       expirations: [
+        10000,
         min,
+        min+30000,
         5*min,
         15*min,
         hour,
         12*hour,
-        24*hour,
-        7*24*hour
+        day,
+        7*day
       ]
     };
   },
@@ -25,9 +28,12 @@ export default React.createClass({
     this.props.onSetExpiration(val);
   },
   render: function() {
-    let now = Date.now();
     let expireOpts = this.state.expirations.map((opt, i) => {
-      return (<option value={opt} key={i}>{moment().add(opt).fromNow(true)}</option>);
+      return (
+        <option value={opt} key={i}>
+          {humanizeDuration(opt,{round: true})}
+        </option>
+      );
     });
 
     return (

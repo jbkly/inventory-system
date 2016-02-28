@@ -61,3 +61,12 @@ select,
 input[type="submit"] {
   font-size: 1.2em;
 }
+
+.item.expired {
+  color: gray;
+  font-style: italic;
+}
+
+.item.expired .itemExpiration {
+  color: red;
+}

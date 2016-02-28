@@ -9,7 +9,7 @@ import TimePicker from './components/TimePicker';
 import AddItemForm from './components/AddItemForm';
 import InventorySystem from './components/InventorySystem';
 
-// TODO: notification on item expiration
+// TODO: expiration: if expiration is > 60s away, setTimeout then setInterval when < 60s
 
 // TODO: handle removing an item by label (autocomplete?)
 
@@ -17,7 +17,12 @@ import InventorySystem from './components/InventorySystem';
 
 // TODO: more tests (ui functionality & api, e2e)
 
+// TODO: undo remove
+
+// TODO: pre-seed db with example items
+
 renderDOM(
   <InventorySystem url='//localhost:3000/api/items' pollInterval={2000} />,
   document.getElementById('content')
 );
+
