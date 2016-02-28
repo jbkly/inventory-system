@@ -11,7 +11,7 @@ import InventorySystem from './components/InventorySystem';
 
 // TODO: more tests (ui functionality & api, e2e)
 
-// TODO: undo remove
+// TODO: undo recent removals
 
 // TODO: auto focus on label input additemform
 

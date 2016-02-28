@@ -65,19 +65,19 @@ input {
 }
 
 .itemList {
-  width: auto;
   margin-right: 5em;
   min-width: 200px;
+  width: auto;
 }
 
 .controls {
-  width: 48%;
+  min-width: 48%;
 }
 
 input[type="text"] {
-  padding: 10px;
   font-size: 1.1em;
   margin-right: 4px;
+  padding: 10px;
 }
 
 select,
@@ -98,8 +98,8 @@ input[type="submit"] {
 @media (max-width: 570px) {
   .itemList,
   .controls {
-    width: 100%;
     display: block;
     vertical-align: top;
+    width: 100%;
   }
 }

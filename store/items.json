@@ -18,10 +18,5 @@
     "label": "carrot",
     "type": "vegetable",
     "expiration": 1457906403893
-  },
-  "wine": {
-    "label": "wine",
-    "type": "drink",
-    "expiration": 1456697703893
   }
 }
