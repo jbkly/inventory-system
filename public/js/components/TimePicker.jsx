@@ -2,27 +2,12 @@
 
 import React from 'react';
 import humanizeDuration from 'humanize-duration';
+import { getExpirationTimes } from '../utility';
 
 export default React.createClass({
   displayName: 'TimePicker',
   getInitialState: function() {
-    const min = 60000;
-    const hour = 60*min;
-    const day = 24*hour;
-    return {
-      expirations: [
-        10000,
-        min,
-        2*min,
-        5*min,
-        15*min,
-        hour,
-        12*hour,
-        day,
-        7*day,
-        14*day
-      ]
-    };
+    return { expirations: getExpirationTimes() };
   },
   timeChange: function(e) {
     let val = parseInt(e.target.value, 10);

@@ -77,9 +77,32 @@ export default React.createClass({
       }
     });
   },
+  seedDB: function () {
+    let numItems = 5;
+    let items = util.shuffleArray(util.getSampleItems()).slice(0, numItems);
+
+    for (let item of items) {
+      item.expiration = Date.now() + util.shuffleArray(util.getExpirationTimes()).pop();
+    }
+    let jsonItems = items;
+
+    $.ajax({
+      url: this.props.url + '/bulk',
+      dataType: 'json',
+      type: 'POST',
+      data: JSON.stringify(jsonItems),
+      success: reply => {
+        this.setState({items: reply.data});
+        toastr.success('Successfully seeded the database');
+      },
+      error: (xhr, status, err) => {
+        toastr.error('Error seeding the database');
+        console.error(url, status, err.toString());
+      }
+    });
+  },
   componentDidMount: function() {
     this.loadInventory();
-    setInterval(this.loadInventory, this.props.pollInterval);
   },
   render: function() {
     return (
@@ -87,6 +110,7 @@ export default React.createClass({
         <h1>Inventory System</h1>
         <ItemList items={this.state.items} onRemove={this.removeItem} />
         <div className='controls'>
+          <button name="seedDB" onClick={this.seedDB}>Seed DB with sample items</button>
           <AddItemForm onAddItem={this.handleAddToInventory} />
           <RemoveItemForm items={this.state.items} onRemoveItem={this.removeItem} />
         </div>

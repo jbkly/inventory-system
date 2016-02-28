@@ -15,10 +15,8 @@ import InventorySystem from './components/InventorySystem';
 
 // TODO: undo remove
 
-// TODO: pre-seed db with example items
-
 renderDOM(
-  <InventorySystem url='//localhost:3000/api/items' pollInterval={2000} />,
+  <InventorySystem url='//localhost:3000/api/items' />,
   document.getElementById('content')
 );
 

@@ -53,11 +53,25 @@ ul {
   padding-left: 30px;
 }
 
+button,
+input {
+  font-size: 13px;
+}
+
 .itemList,
 .controls {
-  width: 48%;
   display: inline-block;
   vertical-align: top;
+}
+
+.itemList {
+  width: auto;
+  margin-right: 5em;
+  min-width: 200px;
+}
+
+.controls {
+  width: 48%;
 }
 
 input[type="text"] {

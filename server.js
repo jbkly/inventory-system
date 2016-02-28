@@ -34,7 +34,7 @@ server.register([
   (err) => {
     server.start((err) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
         console.log('server running at: ', server.info.uri);
       }
@@ -72,6 +72,12 @@ const routes = [
     path: '/api/items',
     config: getRouteConfig('Add item to inventory'),
     handler: addItem
+  },
+  {
+    method: 'POST',
+    path: '/api/items/bulk',
+    config: getRouteConfig('Add multiple items to inventory in bulk'),
+    handler: addMultipleItems
   },
   {
     method: 'DELETE',
@@ -116,6 +122,41 @@ function addItem(request, reply) {
       let response = err || {
         statusCode: 201,
         message: 'Item added successfully',
+        data: items
+      }
+      reply(response);
+    });
+  });
+}
+
+function addMultipleItems(request, reply) {
+  fs.readFile(INVENTORY, (err, data) => {
+    if (err) {
+      console.error(err);
+      return reply(err).code(500);
+    }
+
+    let items = JSON.parse(data);
+    let key = Object.keys(request.payload)[0]; // string
+    let parsedArray = JSON.parse(key);
+    let itemsAdded = [];
+
+    for (let item of parsedArray) {
+      if (items[item.label]) continue; // ignore if item label already exists
+      items[item.label] = {
+        label: item.label,
+        type: item.type,
+        expiration: item.expiration
+      };
+      itemsAdded.push(item.label);
+    }
+
+    if (!itemsAdded.length) return reply('No items added').code(409);
+
+    fs.writeFile(INVENTORY, JSON.stringify(items, null, 2), (err) => {
+      let response = err || {
+        statusCode: 201,
+        message: `${itemsAdded.length} items added successfully`,
         data: items
       }
       reply(response);
