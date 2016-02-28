@@ -33,7 +33,7 @@ describe('InventorySystem', () => {
 
   it('should contain the add item form', () => {
     const actual = renderer.getRenderOutput();
-    const expected = <AddItemForm onAddItem={function noRefCheck() {}} />;
+    const expected = <AddItemForm onAddItem={function noRefCheck() {}} items={{}} />;
     expect(actual).toIncludeJSX(expected);
   });
 
