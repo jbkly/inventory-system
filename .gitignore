@@ -35,3 +35,5 @@ jspm_packages
 .node_repl_history
 # ===== End Node.gitignore =====
 
+# Store
+store

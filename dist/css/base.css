@@ -1,0 +1,105 @@
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 30px;
+  min-width: 320px;
+  box-sizing: border-box;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  margin: 15px 0 0;
+  padding: 0;
+}
+
+h1 {
+  border-bottom: 1px solid #ddd;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 1px solid #eee;
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+p, ul {
+  margin: 0;
+}
+
+ul {
+  padding-left: 30px;
+}
+
+button,
+input {
+  font-size: 13px;
+}
+
+.itemList,
+.controls {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.itemList {
+  margin-right: 5em;
+  min-width: 200px;
+  width: auto;
+}
+
+.controls {
+  min-width: 48%;
+}
+
+input[type="text"] {
+  font-size: 1.1em;
+  margin-right: 4px;
+  padding: 10px;
+}
+
+select,
+input[type="submit"] {
+  font-size: 1.2em;
+}
+
+.item.expired {
+  color: gray;
+  font-style: italic;
+}
+
+.item.expired .itemExpiration {
+  color: red;
+}
+
+/* media queries */
+@media (max-width: 570px) {
+  .itemList,
+  .controls {
+    display: block;
+    vertical-align: top;
+    width: 100%;
+  }
+}
