@@ -18,7 +18,7 @@ I didn't want to spend too much time on database code, so items are stored in a 
 The UI is handled by modular, reusable React components, and it optimistically updates before hearing back from the server to create faster feedback. 
 
 ### Features
-* Add items with a label, type, and expiration time. Duplicate labels are disallowed on the client side. 
+* Add items with a label, type, and expiration time. Duplicate labels are disallowed on both the client and server side. 
 * Remove items from the inventory using either a dropdown or buttons on each item, and get a notification (provided by [toastr](https://github.com/CodeSeven/toastr)) that the item has been removed.
 * Seed the database with a few random items by clicking a button.
 * Set item expiration dates ranging from two weeks to a few seconds. When an item expires, user gets a notification and visual feedback that the item is expired.
