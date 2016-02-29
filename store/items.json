@@ -1,14 +1,4 @@
 {
-  "pear": {
-    "label": "pear",
-    "type": "fruit",
-    "expiration": 1456798183044
-  },
-  "quiche": {
-    "label": "quiche",
-    "type": "uhh",
-    "expiration": 1456711793044
-  },
   "wine": {
     "label": "wine",
     "type": "drink",

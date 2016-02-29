@@ -18,7 +18,7 @@ import InventorySystem from './components/InventorySystem';
 // minify and deploy
 
 renderDOM(
-  <InventorySystem url='//localhost:3000/api/items' />,
+  <InventorySystem url='/api/items' />,
   document.getElementById('content')
 );
 

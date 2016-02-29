@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "A simple API layer to model an inventory",
   "main": "server.js",
+  "engines": {
+    "node": "~5.6"
+  },
   "scripts": {
-    "start": "webpack-dev-server --inline",
+    "start": "node server",
+    "dev": "webpack-dev-server --inline",
     "server": "DEV=true nodemon server --ignore public/ --ignore store/",
     "test": "mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "testwatch": "clear && mocha './tests/**/*.spec.js' --compilers js:babel-core/register --watch",
