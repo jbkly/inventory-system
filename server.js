@@ -43,7 +43,7 @@ server.register([
 function getRouteConfig(description) {
   return {
     tags: ['api'],
-    cors: process.env.DEV ? true : false, // only allow cross-origin in dev environment
+    cors: process.env.DEV ? true : false,
     description: description || ''
   };
 };

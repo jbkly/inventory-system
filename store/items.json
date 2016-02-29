@@ -1,17 +1,27 @@
 {
-  "wine": {
-    "label": "wine",
-    "type": "drink",
-    "expiration": 1456711903044
+  "cheese": {
+    "label": "cheese",
+    "type": "dairy",
+    "expiration": 1456766965540
   },
-  "crackers": {
-    "label": "crackers",
-    "type": "snack",
-    "expiration": 1457921383044
+  "orange": {
+    "label": "orange",
+    "type": "fruit",
+    "expiration": 1456723885540
   },
-  "beer": {
-    "label": "beer",
-    "type": "drink",
-    "expiration": 1456711843044
+  "pizza": {
+    "label": "pizza",
+    "type": "italian",
+    "expiration": 1457328565540
+  },
+  "ham": {
+    "label": "ham",
+    "type": "meat",
+    "expiration": 1457328565540
+  },
+  "eggplant": {
+    "label": "eggplant",
+    "type": "vegetable",
+    "expiration": 1456766965540
   }
 }

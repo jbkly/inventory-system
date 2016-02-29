@@ -8,8 +8,9 @@
   },
   "scripts": {
     "start": "node server",
+    "serve": "DEV=true nodemon server --ignore public/ --ignore store/",
     "dev": "webpack-dev-server --inline",
-    "server": "DEV=true nodemon server --ignore public/ --ignore store/",
+    "go": "npm run serve && npm run dev",
     "test": "mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "testwatch": "clear && mocha './tests/**/*.spec.js' --compilers js:babel-core/register --watch",
     "deploy": "NODE_ENV=production webpack -p --config webpack.prod.config.js"
