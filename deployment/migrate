@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Run any necessary database migration tasks that should happen
-# while the site is paused here.
-
-#node app.js apostrophe:migrate
-
-echo "Site migrated"
-
