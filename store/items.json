@@ -1,0 +1,27 @@
+{
+  "pear": {
+    "label": "pear",
+    "type": "fruit",
+    "expiration": 1456798183044
+  },
+  "quiche": {
+    "label": "quiche",
+    "type": "uhh",
+    "expiration": 1456711793044
+  },
+  "wine": {
+    "label": "wine",
+    "type": "drink",
+    "expiration": 1456711903044
+  },
+  "crackers": {
+    "label": "crackers",
+    "type": "snack",
+    "expiration": 1457921383044
+  },
+  "beer": {
+    "label": "beer",
+    "type": "drink",
+    "expiration": 1456711843044
+  }
+}

@@ -56,7 +56,7 @@ const routes = [
     path: '/{path*}',
     handler: {
       directory: {
-        path: './public',
+        path: './dist',
         index: true
       }
     }
