@@ -13,6 +13,7 @@ const INVENTORY = Path.join(__dirname, 'store/items.json');
 const server = new Hapi.Server();
 
 server.connection({
+  host: 'localhost',
   port: process.env.PORT || 3000
 });
 

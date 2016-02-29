@@ -10,7 +10,7 @@
     "start": "node server",
     "serve": "DEV=true nodemon server --ignore public/ --ignore store/",
     "dev": "webpack-dev-server --inline",
-    "go": "npm run serve && npm run dev",
+    "launch": "open 'http://localhost:3000'",
     "test": "mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "testwatch": "clear && mocha './tests/**/*.spec.js' --compilers js:babel-core/register --watch",
     "deploy": "NODE_ENV=production webpack -p --config webpack.prod.config.js"
@@ -40,7 +40,8 @@
     "jsdom": "^8.0.4",
     "mocha": "^2.4.5",
     "mocha-jsdom": "^1.1.0",
-    "nodemon": "^1.9.0",
+    "nodemon": "^1.9.1",
+    "open": "0.0.5",
     "react-addons-test-utils": "^0.14.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
